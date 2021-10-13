@@ -19,6 +19,10 @@ const UseStyles = makeStyles((theme) => ({
         borderRadius: 4,
         color: '#fff',
         textAlign: 'left',
+        marginRight: 15,
+        '&>last-child':{
+            marginRight: 0,
+        },
         '& h2':{
             fontSize: 16,
             marginTop: 0,
@@ -34,7 +38,7 @@ function Dashboard(){
                     <Sidebar/>
                 </Grid>
                 <Grid item md={10}>
-                    <Grid container className={classes.rightContainer} spacing={4}>
+                    <Grid container className={classes.rightContainer}>
                         <Grid item md={4}>
                             <Grid className={classes.card}>
                                 <h2>Graph Heading</h2>
