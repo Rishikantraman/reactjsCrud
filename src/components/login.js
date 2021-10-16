@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const UseStyles = makeStyles((theme) => ({
   bgRed: {
@@ -63,9 +64,62 @@ const UseStyles = makeStyles((theme) => ({
     },
   },
 }));
-function Login() {
+function Login(props) {
   const classes = UseStyles();
   const [loginBox, setLogin] = useState(true);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile_no, setMobile] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm_password, setCPassword] = useState("");
+  const history = useHistory();
+
+  const signIn = () => {
+    fetch("http://127.0.0.1:8000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email, password: password }),
+    }).then((result) => {
+      result.json().then((res) => {
+        localStorage.setItem("auth", JSON.stringify(res.data[0]));
+        if (res.data[0]) {
+          history.push("/dashboard");
+        } else {
+          alert("login failed");
+        }
+      });
+    });
+  };
+
+  const signUp = () => {
+    fetch(" http://127.0.0.1:8000/api/v1/register", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        mobile_no: mobile_no,
+        password: password,
+        confirm_password: confirm_password,
+      }),
+    }).then((result) => {
+      result.json().then((res) => {
+        localStorage.setItem("auth",JSON.stringify(res.data[0]));
+        if(res.data[0]){
+          history.push("/dashboard");
+        }
+        else{
+          alert("Signup Failed");
+        }
+      })
+    });
+  };
   return (
     <Grid
       container
@@ -87,9 +141,10 @@ function Login() {
                   <h1>Login</h1>
                   <Grid>
                     <TextField
-                      placeholder="User Name"
+                      placeholder="Email"
                       variant="outlined"
                       fullWidth="true"
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </Grid>
                   <Grid>
@@ -97,6 +152,7 @@ function Login() {
                       placeholder="Password"
                       variant="outlined"
                       fullWidth="true"
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </Grid>
                   <Grid className={classes.forgotPass}>
@@ -107,6 +163,7 @@ function Login() {
                       variant="contained"
                       color="primary"
                       className={classes.button}
+                      onClick={signIn}
                     >
                       Login
                     </Button>
@@ -127,9 +184,10 @@ function Login() {
                   <h1>Signup</h1>
                   <Grid>
                     <TextField
-                      placeholder="User Name"
+                      placeholder="Name"
                       variant="outlined"
                       fullWidth="true"
+                      onChange = {(e) =>  setName(e.target.value)}
                     />
                   </Grid>
                   <Grid>
@@ -137,6 +195,15 @@ function Login() {
                       placeholder="Email"
                       variant="outlined"
                       fullWidth="true"
+                      onChange = {(e) =>  setEmail(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid>
+                    <TextField
+                      placeholder="Mobile Number"
+                      variant="outlined"
+                      fullWidth="true"
+                      onChange = {(e) =>  setMobile(e.target.value)}
                     />
                   </Grid>
                   <Grid>
@@ -144,6 +211,15 @@ function Login() {
                       placeholder="Password"
                       variant="outlined"
                       fullWidth="true"
+                      onChange = {(e) =>  setPassword(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid>
+                    <TextField
+                      placeholder="Confirm Password"
+                      variant="outlined"
+                      fullWidth="true"
+                      onChange = {(e) =>  setCPassword(e.target.value)}
                     />
                   </Grid>
                   <Grid className={classes.cta}>
@@ -151,6 +227,7 @@ function Login() {
                       variant="contained"
                       color="primary"
                       className={classes.button}
+                      onClick={signUp}
                     >
                       Signup
                     </Button>

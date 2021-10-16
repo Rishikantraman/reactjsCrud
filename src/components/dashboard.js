@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "./partial/sidebar";
+import Sidebar from "./partial/Sidebar";
 
 function Dashboard(){
     return(
