@@ -33,7 +33,7 @@ function Dashboard(){
     const classes = UseStyles();
     return(
         <div>
-            <Grid container justifyContent="center" className={classes.dashboard}>
+            <Grid container justifyContent="flex-start" className={classes.dashboard}>
                 <Grid item md={2} className={classes.leftNav}>
                     <Sidebar/>
                 </Grid>
