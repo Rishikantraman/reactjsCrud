@@ -11,13 +11,13 @@ const UseStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   loginCard: {
-    background: "#fff",
+    background: "#ff4460",
     boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.12)",
     borderRadius: 4,
   },
   leftPanel: {
     background: "#ff4460",
-    padding: "130px 20px 20px 20px",
+    padding: "20px",
     borderRadius: "4px 0 0 4px",
     textAlign: "center",
     "& p": {
@@ -33,6 +33,7 @@ const UseStyles = makeStyles((theme) => ({
   },
   rightPanel: {
     padding: 20,
+    background: '#fff',
     "& .MuiTextField-root": {
       marginBottom: 15,
     },
