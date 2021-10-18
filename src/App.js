@@ -1,8 +1,9 @@
-import './App.css';
+import "./App.css";
 import React from "react";
-import Login from './components/login';
-import Dashboard from './components/dashboard';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import Protected from "./components/Protected";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -10,10 +11,10 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Login/>
+            <Login />
           </Route>
-          <Route path ="/dashboard">
-            <Dashboard/>
+          <Route path="/dashboard">
+            <Protected components={Dashboard} />
           </Route>
         </Switch>
       </Router>

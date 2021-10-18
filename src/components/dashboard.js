@@ -29,6 +29,8 @@ const UseStyles = makeStyles((theme) => ({
         }
     }
 }));
+import Sidebar from "./partial/Sidebar";
+
 function Dashboard(){
     const classes = UseStyles();
     return(
