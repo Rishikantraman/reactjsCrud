@@ -11,10 +11,10 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Login />
+            <Dashboard />
           </Route>
           <Route path="/dashboard">
-            <Protected components={Dashboard} />
+            {/* <Protected components={Dashboard} /> */}
           </Route>
         </Switch>
       </Router>
